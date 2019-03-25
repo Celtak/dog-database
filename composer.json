@@ -1,0 +1,25 @@
+{
+  "name": "celtak/dog-database",
+  "description": "A class that allows to use a MySQL database and make calls to this database not through queries but through methods",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "symfony/var-dumper": "^4.2",
+    "ext-pdo": "*",
+    "symfony/yaml": "^4.2",
+    "php": "^7.1.0"
+  },
+  "authors": [
+    {
+      "name": "Henrique Rodrigues",
+      "email": "rodrigues.henrique.1984@gmail.com",
+      "homepage": "https://www.azur-web.com/developpeur-web-chartres",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Celtak\\": "app/"
+    }
+  }
+}

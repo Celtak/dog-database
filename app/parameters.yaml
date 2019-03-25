@@ -1,0 +1,18 @@
+# Information on the database
+database:
+  host: 'localhost:8889'
+  dbname: 'azurWeb'
+  username: 'root'
+  password: 'root'
+  charset: 'utf8'
+
+# Example
+# database:
+  # host: 'localhost:8889'
+  # dbname: 'people'
+  # username: 'root'
+  # password: 'root'
+  # charset: 'utf8'
+
+# Show errors
+withError: true # true || false || null
