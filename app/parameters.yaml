@@ -1,9 +1,9 @@
 # Information on the database
 database:
-  host: 'localhost:8889'
-  dbname: 'azurWeb'
-  username: 'root'
-  password: 'root'
+  host: null
+  dbname: null
+  username: null
+  password: null
   charset: 'utf8'
 
 # Example
@@ -15,4 +15,4 @@ database:
   # charset: 'utf8'
 
 # Show errors
-withError: true # true || false || null
+withError: null # true || false || null
