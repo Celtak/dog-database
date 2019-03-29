@@ -51,22 +51,22 @@ class Init
 
             $parametersValues = Yaml::parseFile(__DIR__ . DIRECTORY_SEPARATOR . 'parameters.yaml');
 
-            $this->$params['host'] = $parametersValues['database']['host'];
-            $this->$params['dbname'] = $parametersValues['database']['dbname'];
-            $this->$params['username'] = $parametersValues['database']['username'];
-            $this->$params['password'] = $parametersValues['database']['password'];
-            $this->$params['charset'] = $parametersValues['database']['charset'];
+            $this->params['host'] = $parametersValues['database']['host'];
+            $this->params['dbname'] = $parametersValues['database']['dbname'];
+            $this->params['username'] = $parametersValues['database']['username'];
+            $this->params['password'] = $parametersValues['database']['password'];
+            $this->params['charset'] = $parametersValues['database']['charset'];
 
 
         } else {
 
-            $this->$params['host'] = $params['host'];
+            $this->params['host'] = $params['host'];
 
-            $this->$params['dbname'] = $params['dbname'];
+            $this->params['dbname'] = $params['dbname'];
 
-            $this->$params['username'] = $params['username'];
+            $this->params['username'] = $params['username'];
 
-            $this->$params['password'] = $params['password'];
+            $this->params['password'] = $params['password'];
 
             if ($params['charset'] === null) {
 
@@ -74,7 +74,7 @@ class Init
 
             }
 
-            $this->$params['charset'] = $params['charset'];
+            $this->params['charset'] = $params['charset'];
         }
 
         if($withError === null) {
@@ -93,7 +93,7 @@ class Init
 
         try {
 
-            $this->bdd = new \PDO('mysql:host=' . $this->$params['host'] . ';dbname=' . $this->$params['dbname'] . ';charset=' . $this->$params['charset'], $this->$params['username'], $this->$params['password'], [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+            $this->bdd = new \PDO('mysql:host=' . $this->params['host'] . ';dbname=' . $this->params['dbname'] . ';charset=' . $this->params['charset'], $this->params['username'], $this->params['password'], [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
 
         } catch (\Exception $e) {
 
