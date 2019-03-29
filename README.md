@@ -1,3 +1,11 @@
+# Installation
+
+## Composer install
+
+```
+composer require celtak/dog-database
+```
+
 # Documentation
 
 ## Prerequisites
