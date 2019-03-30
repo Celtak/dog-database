@@ -10,8 +10,11 @@ namespace Celtak;
 class DogDatabase extends Crud
 {
 
-    // ------------------------------------
-    // DATABASE INFORMATION
+    /*
+    ––––––––––––––––––––––––
+    -- Database information --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param array $parameters
