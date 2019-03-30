@@ -212,7 +212,7 @@ dump($database->getCustomizedQuery('SELECT * FROM users WHERE id = "10"'));
 To write.
 
 ```php
-$database->customizedExec('INSERT INTO utilisateurs (nom, prenom, age) VALUES ("Henrique", "Rodrigues", "33")');
+$database->customizedExec('INSERT INTO utilisateurs (name, first, old) VALUES ("Henrique", "Rodrigues", "33")');
 ```
 
 
