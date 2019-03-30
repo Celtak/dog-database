@@ -371,11 +371,11 @@ class Crud extends Init
      *  ['where']:  Obligatory
      *  ['table']:  Insert the name of the table used (Default: $this->table)
      */
-    public function update($data, $parameters)
+    public function update($data, $parameters = [])
     {
 
 
-        if ($parameters['where'] === null) {
+        if (!isset($parameters['where'])) {
 
 
             if ($this->withError) {
@@ -391,7 +391,7 @@ class Crud extends Init
 
 
         $parameters = [
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table'],
             'where' => $parameters['where'],
         ];
 
@@ -440,7 +440,7 @@ class Crud extends Init
     {
 
         $parameters = [
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table'],
             'where' => ['id', $id],
         ];
 
@@ -467,7 +467,7 @@ class Crud extends Init
     public function delete($parameters = [])
     {
 
-        if ($parameters['where'] === null) {
+        if (!isset($parameters['where'])) {
 
 
             if ($this->withError) {
@@ -482,7 +482,7 @@ class Crud extends Init
         }
 
         $parameters = [
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table'],
             'where' => $parameters['where'],
         ];
 
@@ -506,7 +506,7 @@ class Crud extends Init
     {
 
         $parameters = [
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table'],
             'where' => ['id', $id],
         ];
 
