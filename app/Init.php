@@ -68,13 +68,14 @@ class Init
 
             $this->params['password'] = $params['password'];
 
-            if ($params['charset'] === null) {
+            if (!isset($params['charset'])) {
 
                 $params['charset'] = 'utf8';
 
             }
 
             $this->params['charset'] = $params['charset'];
+
         }
 
         if($withError === null) {

@@ -25,9 +25,9 @@ class DogDatabase extends Crud
     {
 
         $parameters = [
-            'details' => $parameters['details'] === null ? false : $parameters['details'],
-            'clean' => $parameters['clean'] === null ? true : $parameters['clean'],
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table']
+            'details' => !isset($parameters['details']) ? false : $parameters['details'],
+            'clean' => !isset($parameters['clean']) ? true : $parameters['clean'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table']
         ];
 
 

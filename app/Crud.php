@@ -36,8 +36,11 @@ class Crud extends Init
 
 
 
-    // ------------------------------------
-    // CREATE
+    /*
+    ––––––––––––––––––––––––
+    -- Create --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param array $data
@@ -55,7 +58,7 @@ class Crud extends Init
     {
 
         $parameters = [
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table']
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table']
         ];
 
         $prepare = 'INSERT INTO ' . $parameters['table'] . ' (';
@@ -103,8 +106,11 @@ class Crud extends Init
 
 
 
-    // ------------------------------------
-    // READ
+    /*
+    ––––––––––––––––––––––––
+    -- Read --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param $query
@@ -115,21 +121,22 @@ class Crud extends Init
     {
 
         $parameters = [
-            'where' => $parameters['where'],
-            'orderBy' => $parameters['orderBy'],
-            'limit' => $parameters['limit'],
-            'clean' => $parameters['clean'] === null ? true : $parameters['clean'],
-            'table' => $parameters['table'] === null ? $this->table : $parameters['table']
+            'where' => !isset($parameters['where']) ? null : $parameters['where'],
+            'orderBy' => !isset($parameters['orderBy']) ? null : $parameters['orderBy'],
+            'limit' => !isset($parameters['limit']) ?  null : $parameters['limit'],
+            'clean' => !isset($parameters['clean']) ? true : $parameters['clean'],
+            'table' => !isset($parameters['table']) ? $this->table : $parameters['table']
         ];
 
 
-        if ($parameters['where'] === null) {
+        if (!isset($parameters['where'])) {
 
             $this->request = $query . $parameters['table'];
 
+
         } else {
 
-            if ($parameters['where'][2] === null) {
+            if (!isset($parameters['where'][2])) {
 
                 $parameters['where'][2] = '=';
 
@@ -140,11 +147,11 @@ class Crud extends Init
         }
 
 
-        if ($parameters['orderBy'] !== null) {
+        if (isset($parameters['orderBy'])) {
 
             if (is_array($parameters['orderBy'])) {
 
-                if ($parameters['orderBy'][1] === null) {
+                if (!isset($parameters['orderBy'][1])) {
 
                     $this->request .= ' ORDER BY ' . $parameters['orderBy'][0];
 
@@ -163,7 +170,7 @@ class Crud extends Init
 
         }
 
-        if ($parameters['limit'] !== null) {
+        if (isset($parameters['limit'])) {
 
             $this->request .= ' LIMIT ' . $parameters['limit'][0] . ', ' . $parameters['limit'][1];
 
@@ -315,6 +322,19 @@ class Crud extends Init
 
         $draft = $this->get('SELECT * FROM ', $parameters);
 
+        if($draft === []){
+
+            Box::error([
+                'exception' => new \Exception('Error: id ' .$id .' probably does not exist, check your database'),
+                'file' => __FILE__,
+                'line' => __LINE__,
+                'withError' => $this->withError,
+                'request' => $this->request
+            ]);
+
+        }
+
+
         return $draft[0];
 
     }
@@ -331,8 +351,11 @@ class Crud extends Init
 
 
 
-    // ------------------------------------
-    // UPDATE
+    /*
+    ––––––––––––––––––––––––
+    -- Update --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param array $data
@@ -352,7 +375,7 @@ class Crud extends Init
     {
 
 
-        if($parameters['where'] === null) {
+        if ($parameters['where'] === null) {
 
 
             if ($this->withError) {
@@ -378,7 +401,7 @@ class Crud extends Init
 
         for ($i = 0; $i < $dataLength; $i++) {
 
-            if($i + 1 === $dataLength){
+            if ($i + 1 === $dataLength) {
 
                 $prepare .= $data[$i][0] . " = '" . $data[$i][1] . "'";
 
@@ -390,7 +413,7 @@ class Crud extends Init
 
         }
 
-        $prepare .= ' WHERE ' . $parameters['where'][0] . ' = "' . $parameters['where'][1]. '"';
+        $prepare .= ' WHERE ' . $parameters['where'][0] . ' = "' . $parameters['where'][1] . '"';
 
 
         $this->request = $prepare;
@@ -413,7 +436,8 @@ class Crud extends Init
      * @param array $parameters
      *  ['table']:  Insert the name of the table used (Default: $this->table)
      */
-    public function updateId($id,$data, $parameters = []){
+    public function updateId($id, $data, $parameters = [])
+    {
 
         $parameters = [
             'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
@@ -429,17 +453,21 @@ class Crud extends Init
 
 
 
-    // ------------------------------------
-    // DELETE
+    /*
+    ––––––––––––––––––––––––
+    -- Delete --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param array $parameters
      *  ['where']:  Obligatory
      *  ['table']:  Insert the name of the table used (Default: $this->table)
      */
-    public function delete($parameters = []){
+    public function delete($parameters = [])
+    {
 
-        if($parameters['where'] === null) {
+        if ($parameters['where'] === null) {
 
 
             if ($this->withError) {
@@ -461,7 +489,7 @@ class Crud extends Init
 
         $prepare = 'DELETE FROM ' . $parameters['table'];
 
-        $prepare .= ' WHERE ' . $parameters['where'][0] . ' = "' . $parameters['where'][1]. '"';
+        $prepare .= ' WHERE ' . $parameters['where'][0] . ' = "' . $parameters['where'][1] . '"';
 
         $this->request = $prepare;
 
@@ -474,7 +502,8 @@ class Crud extends Init
      * @param array $parameters
      *  ['table']:  Insert the name of the table used (Default: $this->table)
      */
-    public function deleteId($id, $parameters = []) {
+    public function deleteId($id, $parameters = [])
+    {
 
         $parameters = [
             'table' => $parameters['table'] === null ? $this->table : $parameters['table'],
@@ -488,9 +517,11 @@ class Crud extends Init
 
 
 
-
-    // ------------------------------------
-    // CUSTOMIZED
+    /*
+    ––––––––––––––––––––––––
+    -- Customized --
+    ––––––––––––––––––––––––
+    */
 
     /**
      * @param $exec
