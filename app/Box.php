@@ -21,38 +21,39 @@ class Box
     static function error($parameters)
     {
 
+        /*
         $parameters['exception'];
         $parameters['line'];
         $parameters['file'];
         $parameters['withError'];
         $parameters['request'];
+        */
 
 
-        if ($parameters['exception'] === null) {
+        if (!isset($parameters['exception'])) {
 
             dump('WARNING: The exception is not specified');
         }
 
-        if ($parameters['line'] === null) {
+        if (!isset($parameters['line'])) {
 
             dump('WARNING: The line number is not specified');
         }
 
-        if ($parameters['file'] === null) {
+        if (!isset($parameters['file'])) {
 
             dump('WARNING: The file is not specified');
         }
 
-        if ($parameters['withError'] === null) {
+        if (!isset($parameters['withError'])) {
 
             $parameters['withError'] = false;
         }
 
-        if ($parameters['request'] === null) {
+        if (!isset($parameters['request'])) {
 
             $parameters['request'] = false;
         }
-
 
         if ($parameters['withError']) {
 
@@ -69,6 +70,5 @@ class Box
 
         }
     }
-
 
 }
